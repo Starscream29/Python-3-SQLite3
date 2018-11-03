@@ -14,13 +14,14 @@ def memberOptions(user):
     print("C - Book a member")
     print("D - Post a request")
     print("E - Search and delete ride requests")
+    print("Z - Logout")
     print("========")
     print("Type A B C D or E and hit enter to select option")
 
     # Handles user menu choice
     while True:
         userInput = input("Function> ")
-        if userInput.upper() in ('A', 'B', 'C', 'D', 'E'):
+        if userInput.upper() in ('A', 'B', 'C', 'D', 'E', 'Z'):
             break
         else:
             print("Input value not valid, please retry your option.")
@@ -36,8 +37,8 @@ def memberOptions(user):
         PostRequest(user)
     elif userInput.upper() == 'E':
         RequestOptions(user)
-
-
+    elif userInput.upper() == 'Z':
+        print("========")
+        print("You are now logged out.")
+        return
     return True
-
-

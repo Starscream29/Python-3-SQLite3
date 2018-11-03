@@ -1,11 +1,12 @@
 # imports
 import sqlite3
+from memberOptions import *
 
 # Login Screen
 def login_menu():
     print ("\n")
     # We gonna leave this line out for now, don't want keywords for people to find on Github lul
-    print("Canada Rideshare Database System")
+    print("Welcome to J. Miller's Rideshare Database System")
     print("========")
     print("A - Existing Users: Login")
     print("B - New Users: Create Account")
@@ -56,7 +57,6 @@ def login_create(conn):
     enteredName = input("Enter your full name> ")
     enteredPhone = input("Enter your phone number> ")
     enteredPassword = input("Choose a password> ")
-
     c.execute("INSERT INTO members VALUES(?,?,?,?)", (enteredEmail,	enteredPhone, enteredName, enteredPassword ))
     conn.commit()
     print ("========")
@@ -92,9 +92,10 @@ def main():
                 print("========")
             else:
                 print("========")
-                print("Welcome Lord ", user[1])
+                print("Welcome Lord", user[1])
                 print("========")
                 showInbox(conn, user)
+                memberOptions(user)
 
         elif userInput == 'B':
             login_create(conn)

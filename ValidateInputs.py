@@ -19,26 +19,37 @@ def Vali_Date(date_text):
 
     return True
 
-def getLocation(input):
-    input = "%" + input + "%"
+def getLocation():
+    LocationResults = 0
+    while True:
 
-    conn = sqlite3.connect('./Database.db')
-    c = conn.cursor()
-    c.execute("select * from locations where city like ? or address like ? or prov like ? or lcode like ?", (input, input, input, input))
+        succ = input("Enter your starting location and select from the list")
+        succ = "%" + succ + "%"
+        conn = sqlite3.connect('./Database.db')
+        c = conn.cursor()
+        c.execute("select * from locations where city like ? or address like ? or prov like ? or lcode like ?", (succ, succ, succ, succ))
 
-    LocationResults = c.fetchall()
-    print(LocationResults)
+        LocationResults = c.fetchall()
+
+        if LocationResults:
+            break
+        print("Sorry, your keyword didn't return any results, please try a different keyword")
     a = 0
     b = 5
+    while True:
+        for n in range(len(LocationResults[a:b])):
+            print(n + a, "  :  ", LocationResults[n + a])
 
-    for n in range(len(LocationResults[a:b])):
-        print(n + a, "  :  ", LocationResults[n + a])
-
-    print("Enter the number of your intended location, then hit enter. Enter X to scroll up or Z to scroll down")
-    #TODO: read inputs, adjust a and b to show different values, and finally return LCODE of selected location
-
-
-
-
-
+        x = input("Enter the number of your intended location or enter X to scroll up or Z to scroll down")
+        if x.isdigit() and (a <= int(x) <= a+4):
+            return LocationResults[int(x)][0]
+            break
+        elif x.upper() == 'X' and a >= 0:
+            a -= 5
+            b -= 5
+        elif x.upper() == 'Z':
+            a += 5
+            b += 5
+        else:
+            print("Invalid input, try again")
     return 1

@@ -1,4 +1,4 @@
-
+import sys
 import sqlite3
 from ValidateInputs import *
 def RequestOptions(user):
@@ -26,7 +26,7 @@ def DeleteRequest(user):
         print("To delete a request, enter the number beside the request. Or press X to cancel.")
         print("Here are all of your ride requests:")
 
-        conn = sqlite3.connect('./Database.db')
+        conn = sqlite3.connect("./"+sys.argv[1])
         c = conn.cursor()
         c.execute("select rdate, pickup, dropoff, amount, rid from requests where email = ?", (user[0], ))
 
@@ -62,7 +62,7 @@ def SearchRequests(user):
     print("Enter message to send to the driver:")
     DriverMessage = input("Message>")
 
-    conn = sqlite3.connect('./Database.db')
+    conn = sqlite3.connect("./"+sys.argv[1])
     c = conn.cursor()
     c.execute("INSERT INTO inbox VALUES(?,datetime('now'),?,?, null, 0)", (ChosenRequestDriver, user[0], DriverMessage,))
     conn.commit()

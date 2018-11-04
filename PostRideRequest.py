@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 from ValidateInputs import*
 
 def PostRequest(user):
@@ -26,7 +27,7 @@ def PostRequest(user):
 
     Payment = input("Amount you are willing to pay ($) >")
 
-    conn = sqlite3.connect('./Database.db')
+    conn = sqlite3.connect("./"+sys.argv[1])
     c = conn.cursor()
 
     c.execute("select COALESCE(max(rid)+1,0)from requests")

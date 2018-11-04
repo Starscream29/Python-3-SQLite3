@@ -1,5 +1,5 @@
-
 import sqlite3
+import sys
 from ValidateInputs import*
 
 def OfferRide(user):
@@ -44,7 +44,7 @@ def OfferRide(user):
     enrouteLocations = [None] * int(enrouteNumber)
 
 
-    conn = sqlite3.connect('./Database.db')
+    conn = sqlite3.connect("./"+sys.argv[1])
     c = conn.cursor()
     c.execute("select COALESCE(max(rno)+1,0)from rides")
     currentRNO = c.fetchone()

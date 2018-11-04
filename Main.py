@@ -1,11 +1,13 @@
 # imports
 import sqlite3
+import sys
 from memberOptions import *
 
 # Login Screen
 def login_menu():
     print ("\n")
     # We gonna leave this line out for now, don't want keywords for people to find on Github lul
+
     print("Welcome to J. Miller's Rideshare Database System")
     print("========")
     print("A - Existing Users: Login")
@@ -77,11 +79,8 @@ def showInbox(conn, user):
         print("    (Inbox is empty, no unread messages)    ")
 
 def main():
-    # Create Inital Database Connection
-    conn = sqlite3.connect('./Database.db')
+    conn = sqlite3.connect("./"+sys.argv[1])
 
-
-    # Allow the user to select their inital task
     while True:
         userInput = login_menu()
         if userInput == 'A':
@@ -99,12 +98,11 @@ def main():
 
         elif userInput == 'B':
             login_create(conn)
-            conn = sqlite3.connect('./Database.db')
+            conn = sqlite3.connect("./"+sys.argv[1])
         elif userInput == 'C':
             print("========")
             print("Goodbye JoJo")
             break
-        # Get associated information, connect to module.
 
 if __name__ == "__main__":
     main()

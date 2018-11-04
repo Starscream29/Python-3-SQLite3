@@ -2,7 +2,7 @@ import sys
 import sqlite3
 
 #
-#This file to mostly just hold misc functions that're gonna be called a whole bunch
+#This file to mostly just hold misc functions that're gonna be called more than once
 #
 
 from datetime import datetime
@@ -15,9 +15,6 @@ def Vali_Date(date_text):
         return True
     except ValueError:
         return False
-
-
-    return True
 
 def getLocation():
     LocationResults = 0
@@ -41,9 +38,9 @@ def getLocation():
             print(n + a, "  :  ", LocationResults[n + a])
 
         x = input("Enter the number of your intended location or enter X to scroll up or Z to scroll down")
-        if x.isdigit() and (a <= int(x) <= a+4):
+        if x.isdigit() and (a <= int(x) < a+len(LocationResults[a:b])):
             return LocationResults[int(x)][0]
-            break
+
         elif x.upper() == 'X' and a >= 0:
             a -= 5
             b -= 5
@@ -52,7 +49,6 @@ def getLocation():
             b += 5
         else:
             print("Invalid input, try again")
-    return 1
 
 def getRequests():
     RequestResults = 0
@@ -79,7 +75,7 @@ def getRequests():
         x = input("Enter the number of your intended request or enter X to scroll up or Z to scroll down")
         if x.isdigit() and (a <= int(x) <= a+4):
             return RequestResults[int(x)][1]
-            break
+
         elif x.upper() == 'X' and a >= 0:
             a -= 5
             b -= 5
@@ -88,7 +84,7 @@ def getRequests():
             b += 5
         else:
             print("Invalid input, try again")
-    return 1
+
 
 def ValidateLocation(locationCode):
 
@@ -105,9 +101,6 @@ def ValidateLocation(locationCode):
     else:
         print("Location code does not exists, please try again")
         return False
-
-
-    return True
 
 def GetInteger(testInteger):
 
@@ -150,13 +143,13 @@ def getRide():
     b = 5
     while True:
         for n in range(len(RideResults[a:b])):
-            print(n + a, "  :  ", RideResults[n + a])
+
+            print(n + a, "  :  Driven by", RideResults[n + a][7], "with", RideResults[n + a][3], "seats, at $", RideResults[n + a][1], "for the trip from ",RideResults[n + a][5], "to",RideResults[n + a][6], "on",RideResults[n + a][2])
 
         x = input("Enter X to scroll up and Z to scroll down. If there is a ride you would like to book then please "
                   "enter the number of the intended ride to message the member.")
         if x.isdigit() and (a <= int(x) <= a + 4):
             return RideResults[int(x)]
-            break
         elif x.upper() == 'X' and a >= 0:
             a -= 5
             b -= 5
@@ -165,4 +158,3 @@ def getRide():
             b += 5
         else:
             print("Invalid input, try again")
-    return 1

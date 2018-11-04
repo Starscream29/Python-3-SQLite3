@@ -18,8 +18,6 @@ def RequestOptions(user):
         else:
             print("Entry Invalid, please try again")
 
-    return
-
 def DeleteRequest(user):
     while True:
         print("========")
@@ -50,8 +48,6 @@ def DeleteRequest(user):
             conn.commit()
         else:
             print("Invalid Entry, please try again")
-
-    return
 
 def SearchRequests(user):
     print("========")

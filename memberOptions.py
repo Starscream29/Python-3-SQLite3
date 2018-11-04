@@ -40,7 +40,4 @@ def memberOptions(user):
         else:
             print("Input value not valid, please retry your option.")
             continue
-
-
-
     return

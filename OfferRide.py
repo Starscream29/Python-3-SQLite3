@@ -38,11 +38,9 @@ def OfferRide(user):
         #then no number was given
         carNumber = None
 
-
     print("Select enroute location")
     enrouteNumber = input("Please select the number of enroute locations you wish to enter (0 is ok)> ")
     enrouteLocations = [None] * int(enrouteNumber)
-
 
     conn = sqlite3.connect("./"+sys.argv[1])
     c = conn.cursor()
@@ -56,9 +54,6 @@ def OfferRide(user):
         c.execute("INSERT INTO enroute VALUES(?,?)", (currentRNO[0], enrouteLocations[n]))
 
     conn.commit()
-
-    conn.close()
-
-    return True
+    return
 
 

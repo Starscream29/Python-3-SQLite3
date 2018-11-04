@@ -19,7 +19,6 @@ def PostRequest(user):
         if pickupCode is not False:
             break
 
-
     while True:
         dropoffCode = ValidateLocation(input("Dropoff Location>"))
         if dropoffCode is not False:
@@ -34,7 +33,6 @@ def PostRequest(user):
     currentRID = c.fetchone()
 
     c.execute("INSERT INTO requests VALUES(?,?,?,?,?,?)", (currentRID[0], user[0], dateInput, pickupCode, dropoffCode, Payment))
-
     conn.commit()
 
     print("========")

@@ -66,7 +66,7 @@ def login_create(conn):
 def showInbox(conn, user):
     print("Here are your unread messages:")
     c = conn.cursor()
-    c.execute("SELECT	*   FROM	inbox	WHERE	email=? and seen=0", (user[0]))
+    c.execute("SELECT    *   FROM    inbox    WHERE    email=? and seen=0", (user[0],))
     inbox = c.fetchall()
     for i in range(len(inbox)):
         print("At ", inbox[i][1], ", ", inbox[i][2], " said to you: ", inbox[i][3])

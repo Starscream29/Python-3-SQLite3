@@ -13,7 +13,7 @@ def memberOptions(user):
     print("B - Search for a ride")
     print("C - Book a member")
     print("D - Post a request")
-    print("E - Search and delete ride requests")
+    print("E - Search or delete ride requests")
     print("Z - Logout")
     print("========")
     print("Type A B C D or E and hit enter to select option")

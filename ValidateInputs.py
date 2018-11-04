@@ -23,7 +23,7 @@ def getLocation():
     LocationResults = 0
     while True:
 
-        succ = input("Enter your starting location and select from the list")
+        succ = input("Enter your location and select from the list")
         succ = "%" + succ + "%"
         conn = sqlite3.connect('./Database.db')
         c = conn.cursor()
@@ -43,6 +43,42 @@ def getLocation():
         x = input("Enter the number of your intended location or enter X to scroll up or Z to scroll down")
         if x.isdigit() and (a <= int(x) <= a+4):
             return LocationResults[int(x)][0]
+            break
+        elif x.upper() == 'X' and a >= 0:
+            a -= 5
+            b -= 5
+        elif x.upper() == 'Z':
+            a += 5
+            b += 5
+        else:
+            print("Invalid input, try again")
+    return 1
+
+def getRequests():
+    RequestResults = 0
+    while True:
+
+        succ = input("Enter your location and select from the list")
+        succ = "%" + succ + "%"
+        conn = sqlite3.connect('./Database.db')
+        c = conn.cursor()
+        c.execute("select* from requests, locations where pickup = lcode and (city like ? or lcode like ?)", (succ, succ))
+
+        RequestResults = c.fetchall()
+
+        if RequestResults:
+            break
+        print("Sorry, your keyword didn't return any results, please try a different keyword")
+
+    a = 0
+    b = 5
+    while True:
+        for n in range(len(RequestResults[a:b])):
+            print(n + a, "  :  ", RequestResults[n + a])
+
+        x = input("Enter the number of your intended request or enter X to scroll up or Z to scroll down")
+        if x.isdigit() and (a <= int(x) <= a+4):
+            return RequestResults[int(x)][1]
             break
         elif x.upper() == 'X' and a >= 0:
             a -= 5

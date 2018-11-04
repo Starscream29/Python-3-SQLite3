@@ -14,8 +14,9 @@ def OfferRide(user):
     seatNumber = input("Please enter the number of seat you are offering> ")
     seatPrice = input("Please enter your asking price for each seat ($)> ")
     luggage = input("Please enter a quick luggage description>")
+    print("Find a source location")
     locationSrc = getLocation() #Returns LCODE
-
+    print("Find a destination location")
     locationDes = getLocation() #Returns LCODE
 
     print("========")
@@ -37,7 +38,7 @@ def OfferRide(user):
     c.execute("select COALESCE(max(rno)+1,0)from rides")
     currentRNO = c.fetchone()
 
-    c.execute("INSERT INTO rides VALUES(?,?,?,?,?,?,?,?,?)", (currentRNO[0], seatPrice, dateInput, seatNumber, luggage, locationSrc, locationDes, user[0], carNumber ))
+    c.execute("INSERT INTO rides VALUES(?,?,?,?,?,?,?,?,?)", (currentRNO[0], seatPrice, dateInput, seatNumber, luggage, locationSrc, locationDes, user[0], carNumber))
 
     for n in range(len(enrouteLocations)):
         enrouteLocations[n] = getLocation()

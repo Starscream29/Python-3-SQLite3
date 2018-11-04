@@ -20,8 +20,6 @@ def RequestOptions(user):
 
     return
 
-
-
 def DeleteRequest(user):
     while True:
         print("========")
@@ -69,4 +67,4 @@ def SearchRequests(user):
     c.execute("INSERT INTO inbox VALUES(?,datetime('now'),?,?, null, 0)", (ChosenRequestDriver, user[0], DriverMessage,))
     conn.commit()
 
-    return True
+    return

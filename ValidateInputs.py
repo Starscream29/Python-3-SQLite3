@@ -89,3 +89,30 @@ def getRequests():
         else:
             print("Invalid input, try again")
     return 1
+
+def ValidateLocation(locationCode):
+
+
+    conn = sqlite3.connect('./Database.db')
+    c = conn.cursor()
+    c.execute("select lcode from locations")
+
+    locationsTuples = c.fetchall()
+    locationsList = [i[0] for i in locationsTuples]
+
+    if locationCode in locationsList:
+        return locationCode
+    else:
+        print("Location code does not exists, please try again")
+        return False
+
+
+    return True
+
+def GetInteger(testInteger):
+
+    if testInteger.isdigit():
+        return testInteger
+    else:
+        print("Sorry, please enter an integer value")
+        return False

@@ -5,15 +5,26 @@ from ValidateInputs import*
 def OfferRide(user):
     print("========")
     print("Offering rides:(Mandatory Fields)")
+
     while True:
         dateInput = input("Please enter the date of your ride (YYYY-MM-DD)> ")
         if Vali_Date(dateInput) is False:
-            print("Enter date properly you fuck")
+            print("Format incorrect, please enter a date in the YYYY-MM-DD format only (for example: 2018-05-26)")
         else:
             break
-    seatNumber = input("Please enter the number of seat you are offering> ")
-    seatPrice = input("Please enter your asking price for each seat ($)> ")
+
+    while True:
+        seatNumber = GetInteger(input("Please enter the number of seat you are offering> "))
+        if seatNumber is not False:
+            break
+
+    while True:
+        seatPrice = GetInteger(input("Please enter your asking price for each seat ($)> "))
+        if seatPrice is not False:
+            break
+
     luggage = input("Please enter a quick luggage description>")
+
     print("Find a source location")
     locationSrc = getLocation() #Returns LCODE
     print("Find a destination location")

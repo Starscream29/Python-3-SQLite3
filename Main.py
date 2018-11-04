@@ -32,7 +32,7 @@ def existing_user(conn):
     enteredEmail = input("Email> ")
     enteredPassword = input("Password> ")
     c = conn.cursor()
-    c.execute("SELECT	*	FROM	members	WHERE	email=:try_email and	pwd=:try_password", {"try_email":enteredEmail,	"try_password":	enteredPassword})
+    c.execute("SELECT	*	FROM	members	WHERE	email= ? COLLATE NOCASE and pwd= ?", (enteredEmail, enteredPassword))
     return c.fetchone()
 
 def login_create(conn):

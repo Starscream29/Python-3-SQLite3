@@ -27,7 +27,7 @@ def getLocation():
         succ = "%" + succ + "%"
         conn = sqlite3.connect('./Database.db')
         c = conn.cursor()
-        c.execute("select * from locations where city like ? or address like ? or prov like ? or lcode like ?", (succ, succ, succ, succ))
+        c.execute("select * from locations where city like ? COLLATE NOCASE or address like ? COLLATE NOCASE or prov like ? COLLATE NOCASE or lcode like ? COLLATE NOCASE ", (succ, succ, succ, succ))
 
         LocationResults = c.fetchall()
 
@@ -62,7 +62,7 @@ def getRequests():
         succ = "%" + succ + "%"
         conn = sqlite3.connect('./Database.db')
         c = conn.cursor()
-        c.execute("select* from requests, locations where pickup = lcode and (city like ? or lcode like ?)", (succ, succ))
+        c.execute("select* from requests, locations where pickup = lcode and (city like ? COLLATE NOCASE or lcode like ? COLLATE NOCASE )", (succ, succ))
 
         RequestResults = c.fetchall()
 
@@ -74,7 +74,7 @@ def getRequests():
     b = 5
     while True:
         for n in range(len(RequestResults[a:b])):
-            print(n + a, "  :  ", RequestResults[n + a])
+            print(n + a, "  :  ", "Driven by ",RequestResults[n + a][1], "on", RequestResults[n + a][2], "from", RequestResults[n + a][3], "to", RequestResults[n + a][4], "for the price of $", RequestResults[n + a][5])
 
         x = input("Enter the number of your intended request or enter X to scroll up or Z to scroll down")
         if x.isdigit() and (a <= int(x) <= a+4):
